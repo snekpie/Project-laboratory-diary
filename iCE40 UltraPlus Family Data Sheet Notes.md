@@ -67,3 +67,10 @@ Timing of the device registers can be optimized by programming a phase shift int
 - it can be adjusted dynamically, here the PLL might lose lock after a phase adjustment on the output used as the feedback source and not relock until the tLOCK parameter has been satisfied.
 
 ![[PLL Diagram.png]]
+
+### On-Chip Oscillator
+
+The iCE40 UltraPlus devices feature two different frequency Oscillator:
+
+1. LFOSC - tailored to run at low frequency. Runs at nominal frequency of 10 kHz. 
+2. GFOSC - runs at nominal frequency of 48 MHz, divisible to 24 MHz, 12 MHz or 6 MHz by user option.
