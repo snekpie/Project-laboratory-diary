@@ -8,3 +8,6 @@
 	- PLBs
 	- LCs
 	- oscillators
+
+### Weeks 2.10.2026. - 15.10.2026.
+
