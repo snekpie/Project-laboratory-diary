@@ -73,3 +73,20 @@ It is the most popular because of its simplicity, low latency and reliability. I
 
 
 Reference: "Time-to-digital convertes - A comprehensive overview", Mahantesh P. Mattada, Hansraj Guhilot, International Journal of Circuit Theory and Applications, Volume 49, Issue 3, pages 535-908 [Time‐to‐digital converters—A comprehensive review](https://onlinelibrary.wiley.com/doi/epdf/10.1002/cta.2936)
+
+### Applications of TDCs
+
+#### TDCs in FPGAs
+
+TDCs implemented on Field-Programmable Gate Arrays (FPGAs) have become increasingly prevalent across a wide range of scientific and engineering disciplines, such as high-energy physics experiments, autonomous driving, robotic navigation, medical imaging, owing to their cost-effectiveness, high precision and rapid development cycles. 
+
+Analogous to how an Analog-to-Digital Converter (ADC) quantizes signal amplitude into digital representation, a **Time-to-Digital Converter (TDC) digitizes time intervals between two pulses**. Both converters share fundamental performance metrics, including resolution, dynamic range, Differential Nonlinearity, Integral Nonlinearity, and dead time. 
+
+Their implementation spans multiple scientific and engineering domains requiring precise temporal measurements:
+- in high-energy physics experiments like those at Large Hadron Collider, FPGAs paired with microchannel photomultipliers enable precise particle arrival time measurements for trajectory reconstruction and energy distribution analysis, leveraging their high precision and real-time processing capabilities.
+- LiDAR systems in autonomous vehicles and robotic navigation employ FPGA-TDCs to enhance spatial resolution and system reliability through improved time-of-flight measurements.
+- Medical imaging modalities such as Positron Emission Tomography (PET) benefit from FPGA-TDCs superior time resolution and multi-channel capabilities for accurate photon arrival time detection.
+
+**Resolution** denotes the minimum measurable time interval, while practical measurement precision is typically characterized by the standard deviation of repeated time-interval measurements.
+
+Reference: Chen,R.;Chen,P.;Li,K.; Liu, H.HeterogeneousTapped Delay-Line Time-to-Digital Converter on Artix-7FPGA.Sensors2025,25,2923. https://doi.org/10.3390/s25092923
