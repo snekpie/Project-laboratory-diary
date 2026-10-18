@@ -1,3 +1,5 @@
+### Project 1: wiring switches to LEDs
+
 As my first encounter with the iceBreaker v1.0e development board, I decided to follow a book by Russel Merrick, "Getting Started with FPGAs". This book contains practical examples for ice40 family FPGAs and it uses them as an example a lot of the time.
 
 In chapter 2, the author gave a first task. Wire 4 switches to 4 LEDs, so while a switch (button in our case) is pressed, then the LED wired to it lights up. The original Verilog code from the book is as follows:
@@ -101,7 +103,7 @@ icepack switches_to_leds.asc switches_to_leds.bin
 the last step was this command:
 
 ```powershell
-icepack switches_to_leds.asc switches_to_leds.bin
+iceprog switches_to_leds.bin
 ```
 
 and finally, the setup worked. 
@@ -141,3 +143,74 @@ Write-Host "Build successful: switches_to_leds.bin" -ForegroundColor Green
 
 When I connected the dev board to my laptop using micro-USB cable, my laptop could not execute the following commands since it did not recognize the device. It showed an error with vendor_id and device_id. I downloaded Zadig and replaced the driver for the Dual RS232-HS interface, after which I could complete the execution of the commands.
 
+### Project 2: Lighting an LED with Logic Gates
+
+This is a second project from the "Getting Started With FPGAs book" by Russel Merrick, in chapter 3.
+
+This project should illuminate an LED, but only when two switches are pushed at the same time. In other words, first LUT is used by implementing an AND gate. I tried to implement it without looking at the solution. Since we have 2 switches and 1 LED as the task, I would write the Verilog code the following way:
+
+```Verilog
+module AND_Gate (
+	input i_Switch_1,
+	input i_Switch_2,
+	
+	output o_LED_1
+)
+
+assign o_LED_1 = i_Switch_1 & i_Switch_2;
+
+endmodule \\ AND_Gate
+```
+
+
+An interesting part of the report after running iceprog is this:
+
+```powershell
+Info: constrained 'o_LED_1' to bel 'X18/Y31/io0'
+Warning: Ignoring trailing PCF settings (on line 5)
+Info: constrained 'i_Switch_1' to bel 'X21/Y0/io1'
+Warning: Ignoring trailing PCF settings (on line 6)
+Info: constrained 'i_Switch_2' to bel 'X22/Y0/io1'
+
+Info: Packing constants..
+Info: Packing IOs..
+Info: Packing LUT-FFs..
+Info:        1 LCs used as LUT4 only
+Info:        0 LCs used as LUT4 and DFF
+Info: Packing non-LUT FFs..
+Info:        0 LCs used as DFF only
+Info: Packing carries..
+Info:        0 LCs used as CARRY only
+Info: Packing indirect carry+LUT pairs...
+Info:        0 LUTs merged into carry LCs
+Info: Packing RAMs..
+Info: Placing PLLs..
+Info: Packing special functions..
+Info: Packing PLLs..
+Info: Promoting globals..
+Info: Constraining chains...
+Info:        0 LCs used to legalise carry chains.
+Info: Checksum: 0x55b93e15
+
+Info: Device utilisation:
+Info:            ICESTORM_LC:       3/   5280     0%
+Info:           ICESTORM_RAM:       0/     30     0%
+Info:                  SB_IO:       3/     39     7%
+Info:                  SB_GB:       0/      8     0%
+Info:           ICESTORM_PLL:       0/      1     0%
+Info:            SB_WARMBOOT:       0/      1     0%
+Info:           ICESTORM_DSP:       0/      8     0%
+Info:         ICESTORM_HFOSC:       0/      1     0%
+Info:         ICESTORM_LFOSC:       0/      1     0%
+Info:                 SB_I2C:       0/      2     0%
+Info:                 SB_SPI:       0/      2     0%
+Info:                 IO_I3C:       0/      2     0%
+Info:            SB_LEDDA_IP:       0/      1     0%
+Info:            SB_RGBA_DRV:       0/      1     0%
+Info:         ICESTORM_SPRAM:       0/      4     0%
+Info:         SB_FILTER_50NS:       0/      2     0%
+```
+
+which tells about the device utilization. It definitely seems like an overkill to create a single AND gate from an FPGA :)
+
+3 I/O ports are used and one LUT.
